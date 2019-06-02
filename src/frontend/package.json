@@ -1,0 +1,38 @@
+{
+  "name": "docket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "background.js",
+  "scripts": {
+    "start": "webpack --watch --mode=development",
+    "build": "webpack --mode=production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react-textarea-autosize": "^4.3.3",
+    "@types/socket.io-client": "^1.4.32",
+    "css-loader": "^2.1.1",
+    "expose-loader": "^0.7.5",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.4.4",
+    "web-ext-types": "^3.1.0",
+    "webextension-polyfill": "^0.4.0",
+    "webpack": "^4.8.1",
+    "webpack-cli": "^3.3.1",
+    "webpack-extension-reloader": "^1.0.1"
+  },
+  "dependencies": {
+    "@types/react": "^16.3.16",
+    "@types/react-dom": "^16.0.6",
+    "moment": "^2.23.0",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-textarea-autosize": "^7.0.4",
+    "socket.io-client": "^2.1.1"
+  }
+}

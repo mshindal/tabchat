@@ -1,0 +1,33 @@
+{
+	"manifest_version": 2,
+	"name": "TabChat",
+	"version": "1.4.0",
+	"description": "Chat with the other people viewing a page.",
+	"icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "64": "icons/icon_64.png",
+    "128": "icons/icon_128.png"
+	},
+	"background": {
+		"scripts": [
+      "background.js"
+    ]
+	},
+	"browser_action": {
+		"browser_style": false,
+		"default_icon": {
+			"16": "icons/icon_16.png",
+      "48": "icons/icon_48.png",
+      "64": "icons/icon_64.png",
+      "128": "icons/icon_128.png"
+		},
+		"default_popup": "popup.html",
+		"default_title": "TabChat"
+  },
+  "content_security_policy": "script-src 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; object-src 'self'; frame-src https://www.google.com/recaptcha/",
+	"permissions": [
+    "tabs",
+    "webNavigation"
+	]
+}

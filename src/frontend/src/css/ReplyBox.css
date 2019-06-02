@@ -1,0 +1,22 @@
+.reply-box {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 4px;
+	margin-top: 4px;
+}
+
+.reply-box.root {
+	margin-top: 0;
+}
+
+.reply-box > *:not(:last-child) {
+	margin-bottom: 4px;
+}
+
+.reply-box .buttons > button:not(:last-child) {
+	margin-right: 4px;
+}
+
+.reply-box textarea {
+	font-family: sans-serif;
+}

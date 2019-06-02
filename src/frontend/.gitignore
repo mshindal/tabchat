@@ -1,0 +1,7 @@
+node_modules
+extension/background.js
+extension/borderify.js
+extension/popup.js
+extension/popup.html
+extension/*.js
+extension/*.js.map

@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"module": "es6",
+		"target": "es6",
+		"typeRoots": [
+			"node_modules/@types",
+			"node_modules/web-ext-types"
+		],
+		"jsx": "react",
+		"lib": [
+			"dom",
+			"es6",
+			"dom.iterable",
+			"scripthost",
+			"es2016.array.include"
+		],
+		// needed for momentjs for some reason
+		// https://github.com/moment/moment/issues/3763
+		"moduleResolution": "node"
+	},
+	"include": [
+		"src/**/*"
+	]
+}

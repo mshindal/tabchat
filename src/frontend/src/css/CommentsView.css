@@ -1,0 +1,10 @@
+.comments-view {
+  list-style: none;
+  padding-left: 30px;
+}
+
+.comments-view.root {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}

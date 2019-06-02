@@ -1,0 +1,29 @@
+.comment .action-buttons {
+  display: block; 
+  user-select: none;
+}
+
+.comment .action-buttons a {
+  font-size: .8em;
+  color: gray;
+  cursor: pointer;
+}
+
+.comment .action-buttons a:hover {
+	text-decoration: underline;
+}
+
+.comment {
+  margin-bottom: 4px;
+}
+
+.comment .header {
+	font-size: .8em;
+	color: gray;
+}
+
+.comment p {
+  margin-top: 0;
+  margin-bottom: 0;
+  user-select: text;
+}
