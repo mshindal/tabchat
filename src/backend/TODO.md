@@ -1,1 +1,0 @@
-* Some kind of UI should appear when Tabchat cant reach the server. 
