@@ -36,7 +36,7 @@ export class ReplyBox extends React.Component<Props, State> {
       if (!this.state.replyContents) {
         throw new Error('You can\'t post an empty comment');
       }
-      const captchaToken = useRecaptcha ? await getToken() : undefined;
+      const captchaToken = useRecaptcha ? await getToken(this.recaptchaDiv) : undefined;
       const newComment: NewComment = {
         contents: this.state.replyContents,
         parentId: this.props.parentId,
@@ -63,6 +63,7 @@ export class ReplyBox extends React.Component<Props, State> {
       this.postReply();
     }
   }
+  recaptchaDiv: HTMLDivElement;
   render() {
     return (
       <div className={`reply-box ${this.props.parentId === null ? 'root' : ''}`}>
@@ -82,9 +83,10 @@ export class ReplyBox extends React.Component<Props, State> {
           <button onClick={this.postReply} disabled={this.state.isLoading}>{this.state.isLoading ? 'Loading...' : this.props.replyButtonText}</button>
           {
             this.props.showCancelButton &&
-              <button onClick={this.props.onCancel} disabled={this.state.isLoading}>Cancel</button>
+            <button onClick={this.props.onCancel} disabled={this.state.isLoading}>Cancel</button>
           }
         </div>
+        <div ref={e => this.recaptchaDiv = e} />
       </div>
     )
   }

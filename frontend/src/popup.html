@@ -6,8 +6,8 @@
 	<body>
 		<div id="app"/>
   </body>
-  <% if (USE_RECAPTCHA) { %>
-    <script src="https://www.google.com/recaptcha/api.js?render=<%=RECAPTCHA_SITEKEY%>"></script>
-  <% } %>
   <script src="popup.js"></script>
+  <% if (USE_RECAPTCHA) { %>
+    <script src="https://www.google.com/recaptcha/api.js?render=explicit&onload=recaptchaCallback" async defer></script>
+  <% } %>
 </html>

@@ -21,10 +21,5 @@ export const verifyToken = async (token: string) => {
     method: 'POST',
   });
   const json = await response.json();
-  if (!json.success) {
-    console.log(`Failed to verify reCAPTCHA token. Error code(s): ${json['error-codes'].join(' ')}`)
-  } else {
-    console.log(`reCAPTCHA score: ${json.score}`);
-  }
   return json.success;
 }
