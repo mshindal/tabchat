@@ -43,9 +43,7 @@ export class ReplyBox extends React.Component<Props, State> {
         recaptchaToken: captchaToken
       };
       const currentUrl = await getCurrentUrl();
-      const comment = await postComment(currentUrl, newComment);
-      // TODO error handling
-      this.props.onReply(comment);
+      await postComment(currentUrl, newComment);
       this.setState({ replyContents: '' });
     } catch (error) {
       this.setState({ error });
