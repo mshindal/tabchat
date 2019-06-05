@@ -54,7 +54,7 @@ module.exports = (env, argv) => {
         ] : []
       ),
       new DefinePlugin({
-        'SERVER_URL': isDevelopment ? "'http://localhost:3000'" : "'https://www.tabchat.dev'",
+        'SERVER_URL': isDevelopment ? "'http://localhost:3000'" : "'https://www.tabchat.io'",
         'USE_RECAPTCHA': `${process.env.USE_RECAPTCHA !== undefined}`,
         "RECAPTCHA_SITEKEY": `'${process.env.RECAPTCHA_SITEKEY}'`
       }),

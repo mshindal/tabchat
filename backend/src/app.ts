@@ -24,4 +24,4 @@ if (!port) {
 	throw new Error('The environment variable PORT is missing or empty');
 }
 
-server.listen(port, () => console.log(`TabChat server listening on port ${port}!`));
+server.listen(port, () => console.log(`Tabchat server listening on port ${port}!`));
