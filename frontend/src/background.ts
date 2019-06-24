@@ -124,11 +124,14 @@ browser.tabs.onCreated.addListener(onTabCreated);
   }
 }));
 
-initializeTabs();
-
 socket.on('new comment', async (newComment: Comment) => await sendMessage({
   name: 'new comment',
   payload: newComment
 }));
+
+socket.on('connect', () => {
+  console.log("connected to socket.io");
+  initializeTabs();
+});
 
 const logTabs = () => console.log('tabs', tabs);

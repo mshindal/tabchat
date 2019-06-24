@@ -8,10 +8,10 @@ import { ErrorView } from "./ErrorView";
 
 interface Props {
   parentId: number | null;
-  onReply: (comment: Comment) => any;
   replyButtonText?: string;
   showCancelButton?: boolean;
   onCancel?: () => any;
+  depth: number;
 }
 
 interface State {
@@ -64,7 +64,7 @@ export class ReplyBox extends React.Component<Props, State> {
   recaptchaDiv: HTMLDivElement;
   render() {
     return (
-      <div className={`reply-box ${this.props.parentId === null ? 'root' : ''}`}>
+      <div className={`reply-box ${this.props.parentId === null ? 'root' : ''}`} style={{marginLeft: `${this.props.depth * -1 * 30}px`}}>
         {
           this.state.error &&
             <ErrorView error={this.state.error} />
