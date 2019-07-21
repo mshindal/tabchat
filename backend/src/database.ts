@@ -9,6 +9,6 @@ if (!connectionString) {
 console.log(`Initializing Knex`);
 
 export const knex = k({
-  dialect: 'pg',
+  client: 'pg',
   connection: connectionString
 });

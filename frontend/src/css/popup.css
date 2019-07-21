@@ -1,6 +1,7 @@
+@import url('https://rsms.me/inter/inter.css');
+* { font-family: 'Inter', sans-serif; }
 * {
   font-size: 14px;
-  font-family: sans-serif;
   /* we will override this on the individual parts
    * we want to be selectable */
   user-select: none;

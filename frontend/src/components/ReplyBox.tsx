@@ -5,6 +5,7 @@ import { postComment } from "../fetches";
 import { getToken, useRecaptcha } from '../recaptcha';
 import '../css/ReplyBox.css';
 import { ErrorView } from "./ErrorView";
+import AutosizableTextarea from 'react-textarea-autosize';
 
 interface Props {
   parentId: number | null;
@@ -69,19 +70,19 @@ export class ReplyBox extends React.Component<Props, State> {
           this.state.error &&
             <ErrorView error={this.state.error} />
         }
-        <textarea
+        <AutosizableTextarea
           autoFocus
           value={this.state.replyContents}
           onKeyDown={this.onText}
           onChange={this.onChange}
-          rows={4}
+          minRows={3}
           disabled={this.state.isLoading}
         />
         <div className="buttons">
-          <button onClick={this.postReply} disabled={this.state.isLoading}>{this.state.isLoading ? 'Loading...' : this.props.replyButtonText}</button>
+          <button className="primary" onClick={this.postReply} disabled={this.state.isLoading}>{this.state.isLoading ? 'Loading...' : this.props.replyButtonText}</button>
           {
             this.props.showCancelButton &&
-            <button onClick={this.props.onCancel} disabled={this.state.isLoading}>Cancel</button>
+            <button className="secondary" onClick={this.props.onCancel} disabled={this.state.isLoading}>Cancel</button>
           }
         </div>
         <div ref={e => this.recaptchaDiv = e} />

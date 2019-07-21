@@ -48,7 +48,10 @@ const onNavigation = async (tabId: number, newUrl: string) => {
       browser.browserAction.setBadgeText({
         text: `${count}`,
         tabId
-      })
+      });
+      browser.browserAction.setBadgeBackgroundColor({
+        color: '#473bff'
+      });
     }
   });
 

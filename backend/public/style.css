@@ -1,6 +1,5 @@
-* {
-	font-family: sans-serif;
-}
+@import url('https://rsms.me/inter/inter.css');
+* { font-family: 'Inter', sans-serif; }
 
 body {
 	max-width: 600px;

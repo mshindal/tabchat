@@ -17,8 +17,50 @@
 	margin-right: 4px;
 }
 
+.reply-box .buttons > button {
+  border: 1px solid #473bff;
+  border-radius: 10px;
+  padding: 4px 8px 4px 8px;
+  background-color: #473bff;
+  color: white;
+  cursor: pointer;
+}
+
+.reply-box .buttons > button:focus {
+  outline: none;
+}
+
+.reply-box .buttons > button.secondary {
+  border: 1px solid #e0e0e0;
+  background-color: #e0e0e0;
+  color: black;
+}
+
+.reply-box .buttons > button:hover {
+  border: 1px solid #2E22E6;
+  background-color: #2E22E6;
+}
+
+.reply-box .buttons > button.secondary:hover {
+  border: 1px solid #C7C7C7;
+  background-color: #C7C7C7;
+}
+
 .reply-box textarea {
   font-family: sans-serif;
-  resize: vertical;
+  resize: none;
   min-height: 1.5em;
+  border-radius: 10px;
+  padding: 8px;
+  background-color: #e0e0e0;
+  min-height: calc(1em + 18px);
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.reply-box textarea:focus {
+  outline: none;
+  border: 1px solid #473bff;
+  background-color: white;
 }

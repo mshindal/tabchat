@@ -57,12 +57,12 @@ router.post('/:url/comments', rateLimiter, async (req, res) => {
     }
   }
   const url = req.params.url;
-  const [id]: [number] = await knex.insert({
+  const [id] = await knex.insert({
     contents: newComment.contents,
     parentId: newComment.parentId,
     url
-  }, 'id').into('comments');
-  const [databaseComment]: [DatabaseComment] = await knex.select().where({ id }).from('comments');
+  }, 'id').into('comments') as [number];
+  const [databaseComment] = await knex.select().where({ id }).from('comments') as [DatabaseComment];
   const allComments: DatabaseComment[] = await knex.select().where({ url }).from('comments');
   const commentTree = buildCommentTree(allComments, databaseComment);
   const comment = commentTree[0];
