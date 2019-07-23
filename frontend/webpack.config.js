@@ -65,6 +65,6 @@ module.exports = (env, argv) => {
         inject: false
       })
     ],
-    devtool: isDevelopment ? 'cheap-inline-source-map' : 'source-map'
+    devtool: isDevelopment ? 'inline-source-map' : 'source-map'
   }
 }
