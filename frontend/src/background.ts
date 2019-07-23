@@ -15,14 +15,9 @@ interface Tab {
 
 let tabs: Tab[] = [];
 
-const truncateURL = (url: string): string => {
-  const parsedUrl = new URL(url);
-  return `${parsedUrl.hostname}${parsedUrl.pathname}`;
-}
-
 const findTabById = (tabId: number) => tabs.find(tab => tab.id === tabId);
 
-const findTabsByTruncatedUrl = (url: string) => tabs.filter(tab => tab.url === url);
+const findTabsByUrl = (url: string) => tabs.filter(tab => tab.url === url);
 
 const initializeTabs = async () => {
   const webExtTabs = await browser.tabs.query({});
@@ -36,14 +31,12 @@ const initializeTabs = async () => {
 
 const webExtTabToTab = (webExtTab: browser.tabs.Tab): Tab => ({
   id: webExtTab.id,
-  url: truncateURL(webExtTab.url),
+  url: webExtTab.url,
   participants: undefined
 });
 
 const onNavigation = async (tabId: number, newUrl: string) => {
-  const truncatedNewUrl = truncateURL(newUrl);
-
-  getCommentCount(truncatedNewUrl).then(count => {
+  getCommentCount(newUrl).then(count => {
     if (count !== 0) {
       browser.browserAction.setBadgeText({
         text: `${count}`,
@@ -60,18 +53,17 @@ const onNavigation = async (tabId: number, newUrl: string) => {
     throw new Error(`onNavigation() was called with a tab ID of ${tabId} but we couldn't find that in our tab array`);
   }
 
-  const truncatedOldUrl = tab.url;
+  const oldUrl = tab.url;
+  tab.url = newUrl;
 
-  tab.url = truncatedNewUrl;
-
-  if (findTabsByTruncatedUrl(truncatedOldUrl).length === 0) {
-    console.log(`leaving ${truncatedOldUrl}`);
-    socket.emit('leave', truncatedOldUrl);
+  if (findTabsByUrl(oldUrl).length === 0) {
+    console.log(`leaving ${oldUrl}`);
+    socket.emit('leave', oldUrl);
   }
 
-  if (findTabsByTruncatedUrl(truncatedNewUrl).length === 1) {
-    console.log(`joining ${truncatedNewUrl}`);
-    socket.emit('join', truncatedNewUrl);
+  if (findTabsByUrl(newUrl).length === 1) {
+    console.log(`joining ${newUrl}`);
+    socket.emit('join', newUrl);
   }
 
   logTabs();
@@ -101,7 +93,7 @@ const onTabCreated = async (tab: browser.tabs.Tab) => {
 
   tabs.push(newTab);
 
-  if (findTabsByTruncatedUrl(newTab.url).length === 1) {
+  if (findTabsByUrl(newTab.url).length === 1) {
     console.log(`joining ${newTab.url}`);
     socket.emit('join', newTab.url);
   }

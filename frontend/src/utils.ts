@@ -7,10 +7,5 @@ export const getCurrentUrl = async () => {
     throw Error(`Tried to get the current tab but instead got ${tabs.length} tabs`);
   }
   const currentTab = tabs[0];
-  return truncateURL(currentTab.url);
-}
-
-export const truncateURL = (url: string): string => {
-  const parsedUrl = new URL(url);
-  return `${parsedUrl.hostname}${parsedUrl.pathname}`;
+  return currentTab.url;
 }
