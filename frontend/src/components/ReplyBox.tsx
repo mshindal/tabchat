@@ -31,12 +31,10 @@ export class ReplyBox extends React.Component<Props, State> {
     super(props);
     this.state = { replyContents: '', isLoading: false };
   }
+  private commentIsEmpty = () => this.state.replyContents.length === 0;
   postReply = async () => {
     try {
       this.setState({ isLoading: true });
-      if (!this.state.replyContents) {
-        throw new Error('You can\'t post an empty comment');
-      }
       const captchaToken = useRecaptcha ? await getToken(this.recaptchaDiv) : undefined;
       const newComment: NewComment = {
         contents: this.state.replyContents,
@@ -58,7 +56,7 @@ export class ReplyBox extends React.Component<Props, State> {
     error: undefined
   });
   onText = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.ctrlKey && e.key === 'Enter') {
+    if (e.ctrlKey && e.key === 'Enter' && !this.commentIsEmpty()) {
       this.postReply();
     }
   }
@@ -79,10 +77,25 @@ export class ReplyBox extends React.Component<Props, State> {
           disabled={this.state.isLoading}
         />
         <div className="buttons">
-          <button className="primary" onClick={this.postReply} disabled={this.state.isLoading}>{this.state.isLoading ? 'Loading...' : this.props.replyButtonText}</button>
+          <button
+            className="primary"
+            onClick={this.postReply}
+            disabled={this.state.isLoading || this.commentIsEmpty()}
+          >
+            {this.state.isLoading ?
+              'Loading...' :
+              this.props.replyButtonText
+            }
+          </button>
           {
             this.props.showCancelButton &&
-            <button className="secondary" onClick={this.props.onCancel} disabled={this.state.isLoading}>Cancel</button>
+              <button
+                className="secondary"
+                onClick={this.props.onCancel}
+                disabled={this.state.isLoading}
+              >
+                Cancel
+              </button>
           }
         </div>
         <div ref={e => this.recaptchaDiv = e} />

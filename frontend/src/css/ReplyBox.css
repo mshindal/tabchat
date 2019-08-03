@@ -26,6 +26,13 @@
   cursor: pointer;
 }
 
+.reply-box .buttons > button:disabled,
+.reply-box .buttons > button:hover:disabled {
+  background-color: #8882e4;
+  border: 1px solid #8882e4;
+  cursor: default;
+}
+
 .reply-box .buttons > button:focus {
   outline: none;
 }
