@@ -1,5 +1,5 @@
 import * as SocketIO from 'socket.io';
-import { connection, disconnect, join, leave, newComment } from './eventNames';
+import eventNames from '../../shared/eventNames';
 import { server } from './app';
 import { Comment } from './models';
 
@@ -7,12 +7,12 @@ console.log(`Initializing Socket.IO`);
 
 const io = SocketIO(server);
 
-io.on(connection, socket => {
+io.on(eventNames.connect, socket => {
 	console.log(`New connection from ${socket.id}`);
 
-	socket.on(join, url => onJoin(url, socket));
-	socket.on(leave, url => onLeave(url, socket));
-	socket.on(disconnect, reason => onDisconnect(reason, socket));
+	socket.on(eventNames.join, url => onJoin(url, socket));
+	socket.on(eventNames.leave, url => onLeave(url, socket));
+	socket.on(eventNames.disconnect, reason => onDisconnect(reason, socket));
 });
 
 const onJoin = (url: string, socket: SocketIO.Socket) => {
@@ -32,5 +32,5 @@ const onDisconnect = (reason: string, socket: SocketIO.Socket) => {
 
 export const emitNewComment = (comment: Comment, url: string) => {
 	console.log(`Emitting new comment ${comment.id} to url ${url}`);
-	io.to(url).emit(newComment, comment);
+	io.to(url).emit(eventNames.newComment, comment);
 }

@@ -8,6 +8,8 @@ import './css/popup.css';
 import { ErrorView } from './components/ErrorView';
 import { CommentsView } from './components/CommentsView';
 import { ReplyBox } from './components/ReplyBox';
+import { getSocket } from './events';
+import eventNames from '../../shared/eventNames';
 
 interface Props {}
 
@@ -16,13 +18,6 @@ interface State {
   isLoading: boolean;
   error?: Error;
 }
-
-const getCommentsForCurrentTab = async () => {
-  const currentUrl = await getCurrentUrl();
-  return getComments(currentUrl);
-}
-
-const promise = getCommentsForCurrentTab();
 
 class Popup extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -33,12 +28,20 @@ class Popup extends React.Component<Props, State> {
     };
   }
   componentDidMount() {
-    this.setState({
-      isLoading: true
-    });
-    promise
-      .then(comments => this.setState({ comments, isLoading: false }))
-      .catch(error => this.setState({ error, isLoading: false }));
+    (async () => {
+      try {
+        this.setState({ isLoading: true });
+        const url = await getCurrentUrl();
+        const socket = await getSocket;
+        socket.emit(eventNames.join, url);
+        const comments = await getComments(url);
+        this.setState({ comments });
+      } catch (error) {
+        this.setState({ error });
+      } finally {
+        this.setState({ isLoading: false });
+      }
+    })();
   }
   render() {
     return (

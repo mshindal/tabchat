@@ -2,7 +2,8 @@ import * as React from "react";
 import { Comment } from "../models";
 import '../css/CommentsView.css';
 import { CommentView } from "./CommentView";
-import { addListener, removeListener, IPCMessage } from "../ipc";
+import { getSocket } from "../events";
+import eventNames from "../../../shared/eventNames";
 
 interface Props {
   comments: Comment[];
@@ -12,34 +13,31 @@ interface Props {
 
 export class CommentsView extends React.Component<Props> {
   componentDidMount() {
-    addListener(this.onIPCMessage);
+    getSocket.then(socket => socket.on(eventNames.newComment, this.onNewComment));
   }
   componentWillUnmount() {
-    removeListener(this.onIPCMessage);
+    getSocket.then(socket => socket.off(eventNames.newComment, this.onNewComment));
   }
-  onIPCMessage = (message: IPCMessage<any>) => {
-    if (message.name === 'new comment') {
-      const newComment = (message as IPCMessage<Comment>).payload;
-      if (newComment.parentId === null && this.props.depth === 0) {
-        this.props.onChange([...this.props.comments, newComment]);
-      } else {
-        const parentIndex = this.props.comments.findIndex(c => c.id === newComment.parentId);
-        if (parentIndex !== -1) {
-          this.props.onChange(
-            this.props.comments.map((comment, index) => 
-              index === parentIndex ? 
-                {
-                  ...comment,
-                  children: [
-                    ...comment.children,
-                    newComment
-                  ]
-                }
-              : 
-                comment
-            )
+  onNewComment = (newComment: Comment) => {
+    if (newComment.parentId === null && this.props.depth === 0) {
+      this.props.onChange([...this.props.comments, newComment]);
+    } else {
+      const parentIndex = this.props.comments.findIndex(c => c.id === newComment.parentId);
+      if (parentIndex !== -1) {
+        this.props.onChange(
+          this.props.comments.map((comment, index) => 
+            index === parentIndex ? 
+              {
+                ...comment,
+                children: [
+                  ...comment.children,
+                  newComment
+                ]
+              }
+            : 
+              comment
           )
-        }
+        )
       }
     }
   }
