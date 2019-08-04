@@ -46,7 +46,7 @@ const rateLimiter = new rateLimit({
 router.post('/:url/comments', rateLimiter, async (req, res) => {
   const newComment: NewComment = req.body;
   if (!newComment || !newComment.contents) {
-    return res.status(400).send('Comment is malformed or empty');
+    return res.status(400).send('Comment is malformed or empty?');
   }
   if (useRecaptcha) {
     if (!newComment.recaptchaToken) {

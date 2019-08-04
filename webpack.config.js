@@ -2,13 +2,14 @@ const path = require('path');
 const ExtensionReloader = require('webpack-extension-reloader');
 const DefinePlugin = require('webpack').DefinePlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
-module.exports = (env, argv) => {
+const frontendConfig = (env, argv) => {
   const isDevelopment = argv.mode === 'development';
   return {
     entry: {
-      background: './src/background.ts',
-      popup: './src/popup.tsx'
+      background: './frontend/src/background.ts',
+      popup: './frontend/src/popup.tsx'
     },
     module: {
       rules: [
@@ -37,7 +38,7 @@ module.exports = (env, argv) => {
       extensions: [ '.ts', '.tsx', '.js', '.jsx' ]
     },
     output: {
-      path: path.join(__dirname, 'extension'),
+      path: path.join(__dirname, 'frontend', 'extension'),
       filename: '[name].js'
     },
     plugins: [
@@ -61,10 +62,40 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         title: 'Tabchat',
         filename: 'popup.html',
-        template: 'src/popup.html',
+        template: './frontend/src/popup.html',
         inject: false
       })
     ],
     devtool: isDevelopment ? 'inline-source-map' : 'source-map'
   }
 }
+
+// Shoutout https://medium.com/code-oil/webpack-javascript-bundling-for-both-front-end-and-back-end-b95f1b429810
+const backendConfig = (env, argv) => {
+  return {
+    entry: './backend/src/app.ts',
+    target: 'node',
+    module: {
+      rules: [
+        {
+          test: /\.ts$/,
+          use: 'ts-loader',
+          exclude: /node_modules/
+        }
+      ]
+    },
+    resolve: {
+      extensions: [ '.ts', '.tsx', '.js', '.jsx' ]
+    },
+    output: {
+      path: path.join(__dirname, 'backend', 'out'),
+      filename: '[name].js'
+    },
+    externals: [nodeExternals()]
+  }
+}
+
+module.exports = [
+  frontendConfig,
+  backendConfig
+]
