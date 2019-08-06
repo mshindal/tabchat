@@ -12,3 +12,11 @@ body {
 	width: 350px;
 	padding: 5px;
 }
+
+.muted-text {
+  color: #545454;
+}
+
+.no-comments-message {
+  text-align: center;
+}

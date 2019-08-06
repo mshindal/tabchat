@@ -61,6 +61,10 @@ class Popup extends React.Component<Props, State> {
             comments={this.state.comments}
             onChange={c => this.setState({ comments: c })}
           />
+          {
+            this.state.comments.length === 0 &&
+              <p className="no-comments-message muted-text">No comments yet. Be the first! 😎</p>
+          }
         </>
     )
   }
