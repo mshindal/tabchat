@@ -19,6 +19,6 @@
 		"moduleResolution": "node"
 	},
 	"include": [
-		"src/**/*", "../shared/**/*"
+		"src/**/*"
 	]
 }

@@ -1,5 +1,5 @@
 import * as SocketIO from 'socket.io';
-import eventNames from '../../shared/eventNames';
+import eventNames from './eventNames';
 import { server } from './app';
 import { Comment } from './models';
 

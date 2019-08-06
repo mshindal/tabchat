@@ -12,7 +12,6 @@ services:
       - "3000:3000"
     volumes:
       - .:/app
-      - ../shared:/shared
     depends_on:
       - db
   db:

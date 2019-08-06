@@ -4,8 +4,6 @@ WORKDIR /app
 
 COPY . /app
 
-COPY ../shared /shared
-
 RUN yarn install
 
 # Only used for local testing - Heroku will ignore this and randomly

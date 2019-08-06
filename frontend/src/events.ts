@@ -1,5 +1,5 @@
 import * as io from 'socket.io-client';
-import eventNames from '../../shared/eventNames';
+import eventNames from '../../backend/src/eventNames';
 
 export const getSocket = new Promise<SocketIOClient.Socket>((res, rej) => {
   console.log('Connecting to Socket.IO');

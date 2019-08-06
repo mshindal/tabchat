@@ -3,7 +3,7 @@ import { Comment } from "../models";
 import '../css/CommentsView.css';
 import { CommentView } from "./CommentView";
 import { getSocket } from "../events";
-import eventNames from "../../../shared/eventNames";
+import eventNames from "../../../backend/src/eventNames";
 
 interface Props {
   comments: Comment[];

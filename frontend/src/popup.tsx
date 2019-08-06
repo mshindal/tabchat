@@ -9,7 +9,7 @@ import { ErrorView } from './components/ErrorView';
 import { CommentsView } from './components/CommentsView';
 import { ReplyBox } from './components/ReplyBox';
 import { getSocket } from './events';
-import eventNames from '../../shared/eventNames';
+import eventNames from '../../backend/src/eventNames';
 
 interface Props {}
 
