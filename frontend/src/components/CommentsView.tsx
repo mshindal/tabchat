@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Comment } from "../models";
+import { Comment } from "../../../backend/src/models";
 import '../css/CommentsView.css';
 import { CommentView } from "./CommentView";
 import { getSocket } from "../events";
@@ -13,10 +13,16 @@ interface Props {
 
 export class CommentsView extends React.Component<Props> {
   componentDidMount() {
-    getSocket.then(socket => socket.on(eventNames.newComment, this.onNewComment));
+    getSocket.then(socket => {
+      socket.on(eventNames.newComment, this.onNewComment);
+      socket.on(eventNames.deleteComment, this.onDeleteComment);
+    });
   }
   componentWillUnmount() {
-    getSocket.then(socket => socket.off(eventNames.newComment, this.onNewComment));
+    getSocket.then(socket => {
+      socket.off(eventNames.newComment, this.onNewComment);
+      socket.off(eventNames.deleteComment, this.onDeleteComment);
+    });
   }
   onNewComment = (newComment: Comment) => {
     if (newComment.parentId === null && this.props.depth === 0) {
@@ -39,6 +45,23 @@ export class CommentsView extends React.Component<Props> {
           )
         )
       }
+    }
+  }
+  onDeleteComment = (commentId: number) => {
+    const index = this.props.comments.findIndex(c => c.id === commentId);
+    if (index !== -1) {
+      this.props.onChange(
+        this.props.comments.map((comment, idx) =>
+          idx === index ?
+           {
+             ...comment,
+             canDelete: false,
+             isDeleted: true
+           }
+          :
+           comment
+        )
+      )
     }
   }
   updateComment = (newComment: Comment) => this.props.onChange(this.props.comments.map(comment => 

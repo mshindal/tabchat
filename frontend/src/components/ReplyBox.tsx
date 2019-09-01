@@ -1,11 +1,12 @@
 import * as React from "react";
-import { Comment, NewComment } from "../models";
+import { NewComment } from "../../../backend/src/models";
 import { getCurrentUrl } from "../utils";
 import { postComment } from "../fetches";
 import { getToken, useRecaptcha } from '../recaptcha';
 import '../css/ReplyBox.css';
 import { ErrorView } from "./ErrorView";
 import AutosizableTextarea from 'react-textarea-autosize';
+import { getDeleteKey } from "../deleteKey";
 
 interface Props {
   parentId: number | null;
@@ -35,15 +36,18 @@ export class ReplyBox extends React.Component<Props, State> {
   postReply = async () => {
     try {
       this.setState({ isLoading: true });
-      const captchaToken = useRecaptcha ? await getToken(this.recaptchaDiv) : undefined;
+      const recaptchaToken = useRecaptcha ? await getToken(this.recaptchaDiv) : undefined;
+      const deleteKey = await getDeleteKey();
       const newComment: NewComment = {
         contents: this.state.replyContents,
         parentId: this.props.parentId,
-        recaptchaToken: captchaToken
+        recaptchaToken,
+        deleteKey
       };
       const currentUrl = await getCurrentUrl();
       await postComment(currentUrl, newComment);
       this.setState({ replyContents: '' });
+      this.props.onCancel();
     } catch (error) {
       this.setState({ error });
     } finally {
@@ -76,7 +80,7 @@ export class ReplyBox extends React.Component<Props, State> {
           minRows={3}
           disabled={this.state.isLoading}
         />
-        <div className="buttons">
+        <div className="button-row">
           <button
             className="primary"
             onClick={this.postReply}

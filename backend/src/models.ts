@@ -2,6 +2,7 @@ export interface NewComment {
   contents: string;
   parentId: number | null;
   recaptchaToken: string | undefined;
+  deleteKey: string;
 }
 
 export interface DatabaseComment {
@@ -11,6 +12,8 @@ export interface DatabaseComment {
   createdAt: Date;
   votes: number;
   parentId: number | null;
+  deleteKey: string;
+  isDeleted: boolean;
 }
 
 export interface Comment {
@@ -21,4 +24,6 @@ export interface Comment {
   createdAt: string;
   votes: number;
   children: Comment[];
+  canDelete: boolean;
+  isDeleted: boolean;
 }

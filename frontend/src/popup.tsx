@@ -2,7 +2,7 @@ import 'webextension-polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { getComments } from './fetches';
-import { Comment } from './models';
+import { Comment } from '../../backend/src/models';
 import { getCurrentUrl } from './utils';
 import './css/popup.css';
 import { ErrorView } from './components/ErrorView';
@@ -10,6 +10,7 @@ import { CommentsView } from './components/CommentsView';
 import { ReplyBox } from './components/ReplyBox';
 import { getSocket } from './events';
 import eventNames from '../../backend/src/eventNames';
+import { getDeleteKey } from './deleteKey';
 
 interface Props {}
 
@@ -34,7 +35,8 @@ class Popup extends React.Component<Props, State> {
         const url = await getCurrentUrl();
         const socket = await getSocket;
         socket.emit(eventNames.join, url);
-        const comments = await getComments(url);
+        const deleteKey = await getDeleteKey();
+        const comments = await getComments(url, deleteKey);
         this.setState({ comments });
       } catch (error) {
         this.setState({ error });

@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { URL } from "url";
 
 // Should we use reCAPTCHA at all?
 export const useRecaptcha = process.env['USE_RECAPTCHA'] !== undefined;
@@ -17,7 +18,10 @@ if (useRecaptcha && !secret) {
 
 // https://developers.google.com/recaptcha/docs/verify
 export const verifyToken = async (token: string) => {
-  const response = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${token}`, {
+  const url = new URL('https://www.google.com/recaptcha/api/siteverify');
+  url.searchParams.append('secret', secret);
+  url.searchParams.append('response', token);
+  const response = await fetch(url.href, {
     method: 'POST',
   });
   const json = await response.json();

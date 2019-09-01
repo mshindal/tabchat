@@ -13,46 +13,6 @@
 	margin-bottom: 4px;
 }
 
-.reply-box .buttons > button:not(:last-child) {
-	margin-right: 4px;
-}
-
-.reply-box .buttons > button {
-  border: 1px solid #473bff;
-  border-radius: 10px;
-  padding: 4px 8px 4px 8px;
-  background-color: #473bff;
-  color: white;
-  cursor: pointer;
-}
-
-.reply-box .buttons > button:disabled,
-.reply-box .buttons > button:hover:disabled {
-  background-color: #8882e4;
-  border: 1px solid #8882e4;
-  cursor: default;
-}
-
-.reply-box .buttons > button:focus {
-  outline: none;
-}
-
-.reply-box .buttons > button.secondary {
-  border: 1px solid #e0e0e0;
-  background-color: #e0e0e0;
-  color: black;
-}
-
-.reply-box .buttons > button:hover {
-  border: 1px solid #2E22E6;
-  background-color: #2E22E6;
-}
-
-.reply-box .buttons > button.secondary:hover {
-  border: 1px solid #C7C7C7;
-  background-color: #C7C7C7;
-}
-
 .reply-box textarea {
   font-family: sans-serif;
   resize: none;

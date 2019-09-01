@@ -9,6 +9,10 @@
   cursor: pointer;
 }
 
+.comment .action-buttons a:not(:last-of-type) {
+  margin-right: 4px;
+}
+
 .comment .action-buttons a:hover {
 	text-decoration: underline;
 }

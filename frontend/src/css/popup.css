@@ -1,3 +1,5 @@
+/* Global styles go here */
+
 @import url('https://rsms.me/inter/inter.css');
 * { font-family: 'Inter', sans-serif; }
 * {
@@ -19,4 +21,44 @@ body {
 
 .no-comments-message {
   text-align: center;
+}
+
+button {
+  border: 1px solid #473bff;
+  border-radius: 10px;
+  padding: 4px 8px 4px 8px;
+  background-color: #473bff;
+  color: white;
+  cursor: pointer;
+}
+
+button:disabled,
+button:hover:disabled {
+  background-color: #8882e4;
+  border: 1px solid #8882e4;
+  cursor: default;
+}
+
+button:focus {
+  outline: none;
+}
+
+button.secondary {
+  border: 1px solid #e0e0e0;
+  background-color: #e0e0e0;
+  color: black;
+}
+
+button:hover {
+  border: 1px solid #2E22E6;
+  background-color: #2E22E6;
+}
+
+button.secondary:hover {
+  border: 1px solid #C7C7C7;
+  background-color: #C7C7C7;
+}
+
+.button-row > button:not(:last-child) {
+	margin-right: 4px;
 }

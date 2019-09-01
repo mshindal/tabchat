@@ -28,6 +28,7 @@
   "content_security_policy": "script-src 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; object-src 'self'; frame-src https://www.google.com/recaptcha/",
 	"permissions": [
     "tabs",
-    "webNavigation"
+    "webNavigation",
+    "storage"
 	]
 }

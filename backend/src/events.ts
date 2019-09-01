@@ -34,3 +34,8 @@ export const emitNewComment = (comment: Comment, url: string) => {
 	console.log(`Emitting new comment ${comment.id} to url ${url}`);
 	io.to(url).emit(eventNames.newComment, comment);
 }
+
+export const emitDeleteComment = (commentId: number, url: string) => {
+  console.log(`Emitting delete comment ${commentId} to url ${url}`);
+  io.to(url).emit(eventNames.deleteComment, commentId);
+}
