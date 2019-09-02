@@ -7,6 +7,8 @@ import { verifyToken, useRecaptcha } from "./recaptcha";
 
 const router = express.Router();
 
+const sortByDateAscending = (a: DatabaseComment, b: DatabaseComment) => b.createdAt.getTime() - a.createdAt.getTime();
+
 const buildCommentTree = (flatComments: DatabaseComment[], startingComment?: DatabaseComment, deleteKey?: string): Comment[] => {
   const buildCommentNode = (comment: DatabaseComment): Comment => ({
     id: comment.id,
@@ -15,14 +17,14 @@ const buildCommentTree = (flatComments: DatabaseComment[], startingComment?: Dat
     url: comment.url,
     createdAt: comment.createdAt.toISOString(),
     votes: comment.votes,
-    children: flatComments.filter(c => c.parentId === comment.id).map(buildCommentNode),
+    children: flatComments.filter(c => c.parentId === comment.id).sort(sortByDateAscending).map(buildCommentNode),
     canDelete: comment.isDeleted === false && deleteKey !== undefined && deleteKey === comment.deleteKey,
     isDeleted: comment.isDeleted
   });
   if (startingComment !== undefined) {
-    return flatComments.filter(c => c.id === startingComment.id).map(buildCommentNode);
+    return flatComments.filter(c => c.id === startingComment.id).sort(sortByDateAscending).map(buildCommentNode);
   } else {
-    return flatComments.filter(c => c.parentId === null).map(buildCommentNode);
+    return flatComments.filter(c => c.parentId === null).sort(sortByDateAscending).map(buildCommentNode);
   }
 }
 

@@ -26,7 +26,7 @@ export class CommentsView extends React.Component<Props> {
   }
   onNewComment = (newComment: Comment) => {
     if (newComment.parentId === null && this.props.depth === 0) {
-      this.props.onChange([...this.props.comments, newComment]);
+      this.props.onChange([newComment, ...this.props.comments]);
     } else {
       const parentIndex = this.props.comments.findIndex(c => c.id === newComment.parentId);
       if (parentIndex !== -1) {
@@ -36,8 +36,8 @@ export class CommentsView extends React.Component<Props> {
               {
                 ...comment,
                 children: [
-                  ...comment.children,
-                  newComment
+                  newComment,
+                  ...comment.children
                 ]
               }
             : 
