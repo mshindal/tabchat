@@ -26,4 +26,4 @@ jobs:
         run: yarn install
       - name: Build backend
         working-directory: backend/
-        run: docker-compose --build
+        run: docker-compose build
