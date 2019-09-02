@@ -34,3 +34,6 @@ yarn start
 
 The built files are in the `frontend/extension` directory, and can be installed in Chrome by loading it as an [Unpacked Extension](https://developer.chrome.com/extensions/getstarted#manifest), or installed in Firefox as a [Temporary Add-on](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Temporary_Installation_in_Firefox).
 
+## Icon
+
+Chat icon by [Smashicons](https://www.flaticon.com/free-icon/chat_134920)
