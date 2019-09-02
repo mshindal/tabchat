@@ -76,7 +76,7 @@ router.post('/:url/comments', rateLimiter, async (req, res) => {
   const allComments: DatabaseComment[] = await knex.select().where({ url }).from('comments');
   const commentTree = buildCommentTree(allComments, databaseComment, newComment.deleteKey);
   const comment = commentTree[0];
-  emitNewComment(comment, url);
+  emitNewComment(comment, url, newComment.originatingSocketID);
   res.json(comment);
 });
 

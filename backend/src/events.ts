@@ -12,7 +12,7 @@ io.on(eventNames.connect, socket => {
 
 	socket.on(eventNames.join, url => onJoin(url, socket));
 	socket.on(eventNames.leave, url => onLeave(url, socket));
-	socket.on(eventNames.disconnect, reason => onDisconnect(reason, socket));
+  socket.on(eventNames.disconnect, reason => onDisconnect(reason, socket));
 });
 
 const onJoin = (url: string, socket: SocketIO.Socket) => {
@@ -30,9 +30,35 @@ const onDisconnect = (reason: string, socket: SocketIO.Socket) => {
 	socket.removeAllListeners();
 }
 
-export const emitNewComment = (comment: Comment, url: string) => {
-	console.log(`Emitting new comment ${comment.id} to url ${url}`);
-	io.to(url).emit(eventNames.newComment, comment);
+export const emitNewComment = (comment: Comment, url: string, originatingSocketID?: string) => {
+  // get the socket of the person who created the new comment
+  const originatingSocket = io.sockets.connected[originatingSocketID];
+  // if we can't find it, they must have disconnected after making it,
+  // or originatingSocketID was undefined,
+  // so simply emit the new comment to everyone in the room with `canDelete: false`
+  if (originatingSocket === undefined) {
+    console.log(`Emitting new comment with canDelete: false to url ${url}`);
+    io.to(url).emit(eventNames.newComment, {
+      ...comment,
+      canDelete: false
+    });
+  // otherwise, the user who made the comment is still in the room
+  } else {
+    // to everyone except the user who created the comment,
+    // emit the new comment with `canDelete: false`
+    console.log(`Emitting new comment with canDelete: false to url ${url}, except for socket ${originatingSocketID}`);
+    originatingSocket.to(url).emit(eventNames.newComment, {
+      ...comment,
+      canDelete: false
+    });
+    // to the user who created the comment, emit the new comment
+    // with `canDelete: true`
+    console.log(`Emitting new comment with canDelete: true to socket ${originatingSocketID}`);
+    io.to(originatingSocketID).emit(eventNames.newComment, {
+      ...comment,
+      canDelete: true
+    });
+  }
 }
 
 export const emitDeleteComment = (commentId: number, url: string) => {

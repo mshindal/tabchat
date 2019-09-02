@@ -7,6 +7,7 @@ import '../css/ReplyBox.css';
 import { ErrorView } from "./ErrorView";
 import AutosizableTextarea from 'react-textarea-autosize';
 import { getDeleteKey } from "../deleteKey";
+import { getSocket } from "../events";
 
 interface Props {
   parentId: number | null;
@@ -38,11 +39,13 @@ export class ReplyBox extends React.Component<Props, State> {
       this.setState({ isLoading: true });
       const recaptchaToken = useRecaptcha ? await getToken(this.recaptchaDiv) : undefined;
       const deleteKey = await getDeleteKey();
+      const originatingSocketID = (await getSocket).id;
       const newComment: NewComment = {
         contents: this.state.replyContents,
         parentId: this.props.parentId,
         recaptchaToken,
-        deleteKey
+        deleteKey,
+        originatingSocketID
       };
       const currentUrl = await getCurrentUrl();
       await postComment(currentUrl, newComment);

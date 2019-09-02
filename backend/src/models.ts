@@ -3,6 +3,7 @@ export interface NewComment {
   parentId: number | null;
   recaptchaToken: string | undefined;
   deleteKey: string;
+  originatingSocketID?: string;
 }
 
 export interface DatabaseComment {
