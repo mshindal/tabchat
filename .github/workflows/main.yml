@@ -1,0 +1,28 @@
+name: Main
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install NPM Dependencies
+        working-directory: frontend/
+        run: yarn install
+      - name: Build frontend
+        working-directory: frontend/
+        run: yarn build
+  build-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install NPM Dependencies
+        working-directory: backend/
+        run: yarn install
+      - name: Build backend
+        working-directory: backend/
+        run: docker-compose --build
