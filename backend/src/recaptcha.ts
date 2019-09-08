@@ -35,5 +35,8 @@ export const verifyToken = async (token: string) => {
     method: 'POST',
   });
   const json: SiteVerifyResponse = await response.json();
-  return json.success;
+  if (!json.success || json.score < .5) {
+    return false;
+  }
+  return true;
 }
