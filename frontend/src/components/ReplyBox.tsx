@@ -37,7 +37,7 @@ export class ReplyBox extends React.Component<Props, State> {
   postReply = async () => {
     try {
       this.setState({ isLoading: true });
-      const recaptchaToken = useRecaptcha ? await getToken(this.recaptchaDiv) : undefined;
+      const recaptchaToken = useRecaptcha ? await getToken('post_comment') : undefined;
       const deleteKey = await getDeleteKey();
       const originatingSocketID = (await getSocket).id;
       const newComment: NewComment = {

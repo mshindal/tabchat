@@ -1,6 +1,16 @@
 import fetch from "node-fetch";
 import { URL } from "url";
 
+// https://developers.google.com/recaptcha/docs/v3#site-verify-response
+interface SiteVerifyResponse {
+  success: boolean;
+  score: number;
+  action: string;
+  challenge_ts: string;
+  hostname: string;
+  'error-codes': number[];
+}
+
 // Should we use reCAPTCHA at all?
 export const useRecaptcha = process.env['USE_RECAPTCHA'] !== undefined;
 
@@ -24,6 +34,6 @@ export const verifyToken = async (token: string) => {
   const response = await fetch(url.href, {
     method: 'POST',
   });
-  const json = await response.json();
+  const json: SiteVerifyResponse = await response.json();
   return json.success;
 }
