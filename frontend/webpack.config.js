@@ -1,9 +1,11 @@
 const path = require('path');
 const ExtensionReloader = require('webpack-extension-reloader');
-const DefinePlugin = require('webpack').DefinePlugin;
+const EnvironmentPlugin = require('webpack').EnvironmentPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const dotenv = require('dotenv');
 
 module.exports = (env, argv) => {
+  dotenv.config();
   const isDevelopment = argv.mode === 'development';
   return {
     entry: {
@@ -41,6 +43,9 @@ module.exports = (env, argv) => {
       filename: '[name].js'
     },
     plugins: [
+      new EnvironmentPlugin(
+        ['SERVER_URL', 'USE_RECAPTCHA', 'RECAPTCHA_SITEKEY', 'MAX_COMMENT_LENGTH']
+      ),
       /* If we're in development, use the ExtensionReloader. 
        * The weird syntax is from here: http://2ality.com/2017/04/conditional-literal-entries.html */
       ...(isDevelopment ?
@@ -53,11 +58,6 @@ module.exports = (env, argv) => {
           }) 
         ] : []
       ),
-      new DefinePlugin({
-        'SERVER_URL': `'${process.env.SERVER_URL || 'http://localhost:3000'}'`,
-        'USE_RECAPTCHA': `${process.env.USE_RECAPTCHA !== undefined}`,
-        "RECAPTCHA_SITEKEY": `'${process.env.RECAPTCHA_SITEKEY}'`
-      }),
       new HtmlWebpackPlugin({
         title: 'Tabchat',
         filename: 'popup.html',

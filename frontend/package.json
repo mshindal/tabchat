@@ -6,19 +6,20 @@
   "scripts": {
     "start": "webpack --watch --mode=development",
     "build": "webpack --mode=production",
-    "publish-to-chrome-webstore": "yarn build && node ./scripts/publishToChromeWebStore.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "publish-to-chrome-webstore": "yarn build && node ./scripts/publishToChromeWebStore.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^12.7.4",
     "@types/react-textarea-autosize": "^4.3.3",
     "@types/socket.io-client": "^1.4.32",
     "archiver": "^3.1.1",
     "chrome-web-store-item-property": "^1.1.2",
     "chrome-webstore-upload": "^0.2.2",
     "css-loader": "^3.0.0",
+    "dotenv": "^8.1.0",
     "expose-loader": "^0.7.5",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.1",
@@ -39,5 +40,8 @@
     "react-dom": "^16.4.0",
     "react-textarea-autosize": "^7.0.4",
     "socket.io-client": "^2.1.1"
+  },
+  "resolutions": {
+    "es-abstract": "1.14.1"
   }
 }

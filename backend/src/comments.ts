@@ -3,7 +3,8 @@ import * as express from 'express';
 import * as rateLimit from 'express-rate-limit';
 import { emitNewComment, emitDeleteComment } from "./events";
 import { knex } from "./database";
-import { verifyToken, useRecaptcha } from "./recaptcha";
+import { verifyToken } from "./recaptcha";
+import configuration from "./configuration";
 
 const router = express.Router();
 
@@ -48,7 +49,6 @@ const rateLimiter = new rateLimit({
   max: 10
 });
 
-// TODO: Make sure comment / delete key isn't too long
 router.post('/:url/comments', rateLimiter, async (req, res) => {
   const newComment: NewComment = req.body;
   if (!newComment || !newComment.contents) {
@@ -57,7 +57,13 @@ router.post('/:url/comments', rateLimiter, async (req, res) => {
   if (!newComment.deleteKey) {
     return res.status(400).send('Delete key is missing');
   }
-  if (useRecaptcha) {
+  if (newComment.contents.length > configuration.maxCommentLength) {
+    return res.status(400).send('Comment is too long')
+  }
+  if (newComment.deleteKey.length > 700) {
+    return res.status(400).send('Delete key is too long');
+  }
+  if (configuration.useRecaptcha) {
     if (!newComment.recaptchaToken) {
       return res.status(400).send('Missing reCAPTCHA token');
     }
