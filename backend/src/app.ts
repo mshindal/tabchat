@@ -9,10 +9,11 @@ export const server = new Server(app);
 import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import comments from './comments';
+import configuration from './configuration';
 
 // In production, trust X-Forwarded-Proto, X-Forwarded-Host, and
 // X-Forwarded-For headers, and redirect HTTP requests to HTTPS
-if (process.env.NODE_ENV === 'production') {
+if (configuration.isProduction) {
   app.enable('trust proxy');
   app.use((req, res, next) => {
     if (req.secure) {
@@ -30,10 +31,4 @@ app.use(express.static('public'));
 // routes
 app.use('/', comments);
 
-const port = process.env['PORT'];
-
-if (!port) {
-	throw new Error('The environment variable PORT is missing or empty');
-}
-
-server.listen(port, () => console.log(`Tabchat server listening on port ${port}!`));
+server.listen(configuration.port, () => console.log(`Tabchat server listening on port ${configuration.port}!`));

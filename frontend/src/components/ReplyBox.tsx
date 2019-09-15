@@ -2,12 +2,13 @@ import * as React from "react";
 import { NewComment } from "../../../backend/src/models";
 import { getCurrentUrl } from "../utils";
 import { postComment } from "../fetches";
-import { getToken, useRecaptcha } from '../recaptcha';
+import { getToken } from '../recaptcha';
 import '../css/ReplyBox.css';
 import { ErrorView } from "./ErrorView";
 import AutosizableTextarea from 'react-textarea-autosize';
 import { getDeleteKey } from "../deleteKey";
 import { getSocket } from "../events";
+import configuration from '../../../backend/src/configuration';
 
 interface Props {
   parentId: number | null;
@@ -37,7 +38,7 @@ export class ReplyBox extends React.Component<Props, State> {
   postReply = async () => {
     try {
       this.setState({ isLoading: true });
-      const recaptchaToken = useRecaptcha ? await getToken(this.recaptchaDiv) : undefined;
+      const recaptchaToken = configuration.useRecaptcha ? await getToken('post_comment') : undefined;
       const deleteKey = await getDeleteKey();
       const originatingSocketID = (await getSocket).id;
       const newComment: NewComment = {
@@ -67,6 +68,17 @@ export class ReplyBox extends React.Component<Props, State> {
       this.postReply();
     }
   }
+  getReplyButtonText = () => {
+    if (this.state.isLoading) {
+      return 'Loading...';
+    // If the user is over 80% of the max comment length, show a counter with
+    // the remaining characters they have
+    } else if (this.state.replyContents.length >= (.8 * configuration.maxCommentLength)) {
+      return `${this.props.replyButtonText} (${this.state.replyContents.length} / ${configuration.maxCommentLength})`;
+    } else {
+      return this.props.replyButtonText;
+    }
+  }
   recaptchaDiv: HTMLDivElement;
   render() {
     return (
@@ -82,6 +94,7 @@ export class ReplyBox extends React.Component<Props, State> {
           onChange={this.onChange}
           minRows={3}
           disabled={this.state.isLoading}
+          maxLength={configuration.maxCommentLength}
         />
         <div className="button-row">
           <button
@@ -89,10 +102,7 @@ export class ReplyBox extends React.Component<Props, State> {
             onClick={this.postReply}
             disabled={this.state.isLoading || this.commentIsEmpty()}
           >
-            {this.state.isLoading ?
-              'Loading...' :
-              this.props.replyButtonText
-            }
+            {this.getReplyButtonText()}
           </button>
           {
             this.props.showCancelButton &&

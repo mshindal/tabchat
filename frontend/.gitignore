@@ -5,3 +5,4 @@ extension/popup.js
 extension/popup.html
 extension/*.js
 extension/*.js.map
+extension.zip

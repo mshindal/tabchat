@@ -8,6 +8,8 @@ services:
       - PORT
       - USE_RECAPTCHA
       - RECAPTCHA_SECRET
+      - NODE_ENV
+      - MAX_COMMENT_LENGTH
     ports:
       - "3000:3000"
     volumes:

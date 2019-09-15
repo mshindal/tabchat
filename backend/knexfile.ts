@@ -1,6 +1,7 @@
-import { connectionString } from './src/database';
+import configuration from './src/configuration';
 
+//@ts-ignore
 module.exports = {
   client: 'pg',
-  connection: connectionString
+  connection: configuration.databaseURL
 };
