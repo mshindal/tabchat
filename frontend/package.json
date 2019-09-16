@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack --watch --mode=development",
     "build": "webpack --mode=production",
-    "publish-to-chrome-webstore": "yarn build && node ./scripts/publishToChromeWebStore.js"
+    "publish-to-chrome-webstore": "node ./scripts/publishToChromeWebStore.js"
   },
   "keywords": [],
   "author": "",
