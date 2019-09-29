@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Comment } from "../../../backend/src/models";
-import '../css/CommentsView.css';
 import { CommentView } from "./CommentView";
 import { getSocket } from "../events";
 import eventNames from "../../../backend/src/eventNames";
+import configuration from '../../../backend/src/configuration';
 
 interface Props {
   comments: Comment[];
@@ -71,8 +71,16 @@ export class CommentsView extends React.Component<Props> {
       comment
   ));
   render() {
+    const isRoot = this.props.depth === 0;
+    const isAtMaxDepth = this.props.depth > configuration.maxCommentDepthToIndent;
     return (
-      <ul className={`comments-view ${this.props.depth === 0 ? 'root' : ''}`}>
+      <ul
+        className='comments-view'
+        style={{
+          paddingLeft: isRoot || isAtMaxDepth ? 0 : 30,
+          listStyle: 'none'
+        }}
+      >
         {this.props.comments.map(comment => 
           <CommentView
             depth={this.props.depth}

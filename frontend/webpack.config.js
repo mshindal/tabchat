@@ -44,7 +44,7 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new EnvironmentPlugin(
-        ['SERVER_URL', 'USE_RECAPTCHA', 'RECAPTCHA_SITEKEY', 'MAX_COMMENT_LENGTH']
+        ['SERVER_URL', 'USE_RECAPTCHA', 'RECAPTCHA_SITEKEY', 'MAX_COMMENT_LENGTH', 'MAX_COMMENT_DEPTH_TO_INDENT']
       ),
       /* If we're in development, use the ExtensionReloader. 
        * The weird syntax is from here: http://2ality.com/2017/04/conditional-literal-entries.html */

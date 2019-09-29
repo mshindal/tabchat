@@ -51,6 +51,7 @@ Configuration is done through environment variables. If an environment variable 
 |DATABASE_URL|A connection string pointing to a Postgres database|postgres://postgres:changeme@db:5432/postgres|
 |POSTGRES_PASSWORD|The password of the Postgres database we will spin up|changeme|
 |PORT|The port the backend will listen on|3000|
+|MAX_COMMENT_DEPTH_TO_INDENT|When displaying comments, we will stop indenting at this depth (zero-indexed)|6|
 
 ## Icon
 
