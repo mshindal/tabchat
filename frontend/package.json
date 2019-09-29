@@ -1,16 +1,10 @@
 {
-  "name": "docket",
-  "version": "1.0.0",
-  "description": "",
-  "main": "background.js",
+  "license": "MIT",
   "scripts": {
     "start": "webpack --watch --mode=development",
     "build": "webpack --mode=production",
     "zip": "node ./scripts/createZipFromExtensionFolder"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@types/node": "^12.7.4",
     "@types/react-textarea-autosize": "^4.3.3",
