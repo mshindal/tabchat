@@ -5,10 +5,6 @@
 	margin-top: 4px;
 }
 
-.reply-box.root {
-	margin-top: 0;
-}
-
 .reply-box > *:not(:last-child) {
 	margin-bottom: 4px;
 }

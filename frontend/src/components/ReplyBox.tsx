@@ -82,7 +82,12 @@ export class ReplyBox extends React.Component<Props, State> {
   recaptchaDiv: HTMLDivElement;
   render() {
     return (
-      <div className={`reply-box ${this.props.parentId === null ? 'root' : ''}`} style={{marginLeft: `${this.props.depth * -1 * 30}px`}}>
+      <div
+        className='reply-box'
+        style={{
+            marginLeft: Math.min(this.props.depth, configuration.maxCommentDepthToIndent) * -1 * 30
+        }}
+      >
         {
           this.state.error &&
             <ErrorView error={this.state.error} />

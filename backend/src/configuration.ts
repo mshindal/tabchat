@@ -33,5 +33,6 @@ export default {
   get recaptchaSecret() { return parseEnvironmentVariable(process.env.RECAPTCHA_SECRET, 'string') as string },
   get recaptchaSitekey() { return parseEnvironmentVariable(process.env.RECAPTCHA_SITEKEY, 'string') as string },
   get serverURL() { return parseEnvironmentVariable(process.env.SERVER_URL, 'string') as string },
-  get maxCommentLength() { return parseEnvironmentVariable(process.env.MAX_COMMENT_LENGTH, 'number') as number }
+  get maxCommentLength() { return parseEnvironmentVariable(process.env.MAX_COMMENT_LENGTH, 'number') as number },
+  get maxCommentDepthToIndent() { return parseEnvironmentVariable(process.env.MAX_COMMENT_DEPTH_TO_INDENT, 'number') as number }
 }
