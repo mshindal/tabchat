@@ -17,6 +17,13 @@ jobs:
       - name: Build frontend
         working-directory: frontend/
         run: yarn build
+      - name: Create extension.zip
+        working-directory: frontend/
+        run: yarn run zip
+      - uses: actions/upload-artifact@master
+        with: 
+          name: extension.zip
+          path: frontend/extension.zip
   build-backend:
     runs-on: ubuntu-latest
     steps:
