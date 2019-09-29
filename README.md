@@ -40,7 +40,7 @@ The built files are in the `frontend/extension` directory, and can be installed 
 
 Configuration is done through environment variables. If an environment variable isn't set, it will fallback to its default value specified in the `.env` files in the `frontend` and `backend` directories. These defaults are set up in such a way that you can run Tabchat right after cloning it without having to configure anything.
 
-|Environment Varible|Description|Default Value|
+|Environment Variable|Description|Default Value|
 |-------------------|-------|-------------|
 |USE_RECAPTCHA      |Whether or not reCAPTCHA should be enabled|false|
 |RECAPTCHA_SITEKEY|Key supplied by Google, used for reCAPTCHA on the frontend|empty|

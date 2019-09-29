@@ -16,6 +16,10 @@ jobs:
         run: yarn install
       - name: Build frontend
         working-directory: frontend/
+        env: 
+          USE_RECAPTCHA: 'true'
+          RECAPTCHA_SITEKEY: 6Lf8O7cUAAAAAJeUEaeSn9WMuOZFsudunf8Zxgd7
+          SERVER_URL: https://www.tabchat.io
         run: yarn build
       - uses: actions/upload-artifact@master
         with: 
