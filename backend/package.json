@@ -13,7 +13,7 @@
     "typescript": "^3.0.1"
   },
   "scripts": {
-    "start": "knex migrate:latest && nodemon --legacy-watch",
+    "start": "node scripts/start.js",
     "build": "tsc"
   },
   "dependencies": {

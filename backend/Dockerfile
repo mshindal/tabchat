@@ -5,6 +5,7 @@ WORKDIR /app
 COPY . /app
 
 RUN yarn install
+RUN yarn build
 
 # Only used for local testing - Heroku will ignore this and randomly
 # assign a port

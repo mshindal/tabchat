@@ -47,7 +47,7 @@ Configuration is done through environment variables. If an environment variable 
 |RECAPTCHA_SECRET|Another key supplied by Google, used for reCAPTCHA on the backend|empty|
 |SERVER_URL|The URL that the backend is running on|http://localhost:3000|
 |MAX_COMMENT_LENGTH|Pretty self explanatory - the maximum length of a comment that is accepted|4000|
-|NODE_ENV|Sets the environment for Express.js|development|
+|NODE_ENV|Sets the mode the backend should run under - should be either "development" or "production". In development, `nodemon` is used to live-reload TypeScript files as you save them. |development|
 |DATABASE_URL|A connection string pointing to a Postgres database|postgres://postgres:changeme@db:5432/postgres|
 |POSTGRES_PASSWORD|The password of the Postgres database we will spin up|changeme|
 |PORT|The port the backend will listen on|3000|
