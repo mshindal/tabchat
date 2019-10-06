@@ -67,6 +67,14 @@ class Popup extends React.Component<Props, State> {
             this.state.comments.length === 0 &&
               <p className="no-comments-message muted-text">No comments yet. Be the first! 😎</p>
           }
+          <div className="muted-text recaptcha-disclaimer">
+            <p>
+              Protected by reCAPTCHA. The 
+              Google <a href="https://policies.google.com/privacy">Privacy 
+              Policy</a> and <a href="https://policies.google.com/terms">
+              Terms of Service</a> apply.
+            </p>
+          </div>
         </>
     )
   }
