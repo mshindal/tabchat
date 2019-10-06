@@ -4,7 +4,7 @@ import configuration from '../../backend/src/configuration';
 declare var grecaptcha: any;
 
 if (!configuration.useRecaptcha) {
-  console.warn('USE_RECAPTCHA is set to false, reCAPTCHA is disabled');
+  console.log('USE_RECAPTCHA is set to false, reCAPTCHA is disabled');
 }
 
 let isReady = false;
