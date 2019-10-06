@@ -25,10 +25,11 @@ interface State {
 }
 
 export class ReplyBox extends React.Component<Props, State> {
-  static defaultProps: Partial<Props> = {
+  static defaultProps = {
     replyButtonText: 'Reply',
     showCancelButton: true,
-    onCancel: () => {} // do nothing by default
+    onCancel: () => {}, // do nothing by default
+    depth: 0
   }
   constructor(props: Props) {
     super(props);
