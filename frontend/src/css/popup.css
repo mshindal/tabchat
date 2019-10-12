@@ -70,3 +70,8 @@ button.secondary:hover {
   font-size: 8px;
   margin-bottom: 0;
 }
+
+a,
+a:visited {
+  color: #473bff;
+}
