@@ -39,7 +39,7 @@ router.get('/:url/comments', async (req, res) => {
 
 router.get('/:url/comments/count', async (req, res) => {
   const { url } = req.params;
-  const [{count}] = await knex.count('id').where({ url }).from('comments');
+  const [{count}] = await knex.count('id').where({ url, isDeleted: false }).from('comments');
   res.json(Number(count));
 });
 
