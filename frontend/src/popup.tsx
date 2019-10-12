@@ -11,6 +11,7 @@ import { ReplyBox } from './components/ReplyBox';
 import { getSocket } from './events';
 import eventNames from '../../backend/src/eventNames';
 import { getDeleteKey } from './deleteKey';
+import { updateBadgeWithCount } from './badge';
 
 interface Props {}
 
@@ -38,6 +39,7 @@ class Popup extends React.Component<Props, State> {
         const deleteKey = await getDeleteKey();
         const comments = await getComments(url, deleteKey);
         this.setState({ comments });
+        await updateBadgeWithCount();
       } catch (error) {
         this.setState({ error });
       } finally {
