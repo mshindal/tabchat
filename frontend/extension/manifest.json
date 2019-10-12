@@ -30,5 +30,10 @@
     "tabs",
     "webNavigation",
     "storage"
-	]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "matt.shindala@gmail.com"
+    }
+  }
 }
