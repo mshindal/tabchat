@@ -9,6 +9,7 @@ import AutosizableTextarea from 'react-textarea-autosize';
 import { getDeleteKey } from "../deleteKey";
 import { getSocket } from "../events";
 import configuration from '../../../backend/src/configuration';
+import { updateBadgeWithCount } from "../badge";
 
 interface Props {
   parentId: number | null;
@@ -51,6 +52,7 @@ export class ReplyBox extends React.Component<Props, State> {
       };
       const currentUrl = await getCurrentUrl();
       await postComment(currentUrl, newComment);
+      await updateBadgeWithCount();
       this.setState({ replyContents: '' });
       this.props.onCancel();
     } catch (error) {

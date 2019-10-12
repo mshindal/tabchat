@@ -4,6 +4,7 @@ import { CommentView } from "./CommentView";
 import { getSocket } from "../events";
 import eventNames from "../../../backend/src/eventNames";
 import configuration from '../../../backend/src/configuration';
+import { updateBadgeWithCount } from "../badge";
 
 interface Props {
   comments: Comment[];
@@ -44,6 +45,7 @@ export class CommentsView extends React.Component<Props> {
               comment
           )
         )
+        updateBadgeWithCount();
       }
     }
   }
@@ -62,6 +64,7 @@ export class CommentsView extends React.Component<Props> {
            comment
         )
       )
+      updateBadgeWithCount();
     }
   }
   updateComment = (newComment: Comment) => this.props.onChange(this.props.comments.map(comment => 

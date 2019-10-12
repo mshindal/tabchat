@@ -1,19 +1,8 @@
 import 'webextension-polyfill';
-import { getCommentCount } from './fetches';
+import { updateBadgeWithCount } from './badge';
 import { getCurrentTab } from './utils';
 
-const updateBadgeWithCount = async (tabId: number, url: string) => {
-  const count = await getCommentCount(url);
-  if (count !== 0) {
-    browser.browserAction.setBadgeText({
-      text: `${count}`,
-      tabId
-    });
-    browser.browserAction.setBadgeBackgroundColor({
-      color: '#473bff'
-    });
-  }
-}
+
 
 [
   browser.webNavigation.onCommitted,
@@ -26,8 +15,8 @@ const updateBadgeWithCount = async (tabId: number, url: string) => {
     'reload',
     'keyword'
   ].includes(details.transitionType)) {
-    updateBadgeWithCount(details.tabId, details.url);
+    updateBadgeWithCount();
   }
 }));
 
-getCurrentTab().then(tab => updateBadgeWithCount(tab.id, tab.url));
+getCurrentTab().then(updateBadgeWithCount);
