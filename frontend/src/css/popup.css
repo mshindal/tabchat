@@ -12,7 +12,8 @@
 
 body {
 	min-width: 350px;
-	padding: 5px;
+  padding: 5px;
+  overflow-x: hidden;
 }
 
 .muted-text {
