@@ -4,9 +4,9 @@
 
 A browser extension that lets you leave comments on any webpage. Like [Dissenter](https://dissenter.com/), but you can comment anonymously, and with Reddit's tree style comments. 
 
-It's available now on Chrome: 
+It's available now on [Chrome](https://chrome.google.com/webstore/detail/tabchat/ijilaalgbbmmbkgonfkokjajnlgojaio).
 
-And Firefox: 
+Firefox version coming soon!
 
 ## Building
 
