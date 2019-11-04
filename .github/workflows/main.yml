@@ -34,3 +34,6 @@ jobs:
       - name: Build backend
         working-directory: backend/
         run: docker-compose build
+      - name: Test backend
+        working-directory: backend/
+        run: yarn test
