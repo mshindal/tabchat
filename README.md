@@ -6,7 +6,7 @@ A browser extension that lets you leave comments on any webpage. Like [Dissenter
 
 It's available now on [Chrome](https://chrome.google.com/webstore/detail/tabchat/ijilaalgbbmmbkgonfkokjajnlgojaio).
 
-Firefox version coming soon!
+A Firefox version is coming soon!
 
 ## Building
 
