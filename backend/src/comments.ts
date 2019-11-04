@@ -29,19 +29,23 @@ const buildCommentTree = (flatComments: DatabaseComment[], startingComment?: Dat
   }
 }
 
-router.get('/:url/comments', async (req, res) => {
+export const getComments = async (req: express.Request, res: express.Response) => {
   const { url } = req.params;
   const { deleteKey } = req.query;
   const flatComments: DatabaseComment[] = await knex.select().where({ url }).from('comments');
   const commentTree = buildCommentTree(flatComments, undefined, deleteKey);
   res.json(commentTree);
-});
+};
 
-router.get('/:url/comments/count', async (req, res) => {
+router.get('/:url/comments', getComments);
+
+export const getCommentsCount = async (req: express.Request, res: express.Response) => {
   const { url } = req.params;
-  const [{count}] = await knex.count('id').where({ url, isDeleted: false }).from('comments');
+  const [{ count }] = await knex.count('id').where({ url, isDeleted: false }).from('comments');
   res.json(Number(count));
-});
+}
+
+router.get('/:url/comments/count', getCommentsCount);
 
 // 10 comments max allowed per minute per IP
 const rateLimiter = new rateLimit({
@@ -49,7 +53,7 @@ const rateLimiter = new rateLimit({
   max: 10
 });
 
-router.post('/:url/comments', rateLimiter, async (req, res) => {
+export const addNewComment = async (req: express.Request, res: express.Response) => {
   const newComment: NewComment = req.body;
   if (!newComment || !newComment.contents) {
     return res.status(400).send('Comment is malformed or empty');
@@ -84,7 +88,9 @@ router.post('/:url/comments', rateLimiter, async (req, res) => {
   const comment = commentTree[0];
   emitNewComment(comment, url, newComment.originatingSocketID);
   res.json(comment);
-});
+}
+
+router.post('/:url/comments', rateLimiter, addNewComment);
 
 router.delete('/comments/:id', async (req, res) => {
   const { id } = req.params;
