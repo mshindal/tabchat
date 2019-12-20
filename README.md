@@ -2,7 +2,7 @@
 
 ![](https://github.com/mshindal/tabchat/workflows/main/badge.svg)
 
-A browser extension that lets you leave comments on any webpage. Like [Dissenter](https://dissenter.com/), but you can comment anonymously, and with Reddit's tree style comments. 
+A browser extension that lets you leave comments on any webpage. 
 
 It's available now on [Chrome](https://chrome.google.com/webstore/detail/tabchat/ijilaalgbbmmbkgonfkokjajnlgojaio).
 

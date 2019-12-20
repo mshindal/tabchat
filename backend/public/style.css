@@ -2,6 +2,27 @@
 * { font-family: 'Inter', sans-serif; }
 
 body {
-	max-width: 600px;
-	margin: auto;
+	max-width: 750px;
+  margin: auto;
+  padding: 1em;
+}
+
+#logo {
+  width: 100%;
+  text-align: center;
+}
+
+#logo img {
+  margin: 0 auto;
+  display: inline-block;
+  width: 5em;
+}
+
+.screenshot {
+  box-shadow: 0 0 15px gray;
+  max-width: 100%;
+}
+
+.screenshot:not(:last-of-type) {
+  margin-bottom: 1em;
 }

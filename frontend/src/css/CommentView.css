@@ -30,5 +30,5 @@
   margin-top: 0;
   margin-bottom: 0;
   user-select: text;
-  word-break: break-all;
+  word-break: break-word;
 }
