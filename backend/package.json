@@ -7,7 +7,7 @@
     "@types/node-fetch": "^2.3.4",
     "@types/socket.io": "^2.1.2",
     "jest": "^24.9.0",
-    "nodemon": "^1.18.3",
+    "nodemon": "^2.0.2",
     "ts-jest": "^24.1.0",
     "ts-node": "^8.3.0",
     "typescript": "^3.0.1"
