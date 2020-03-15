@@ -4,9 +4,7 @@
 
 A browser extension that lets you leave comments on any webpage. 
 
-It's available now on [Chrome](https://chrome.google.com/webstore/detail/tabchat/ijilaalgbbmmbkgonfkokjajnlgojaio).
-
-A Firefox version is coming soon!
+Available on [Chrome](https://chrome.google.com/webstore/detail/tabchat/ijilaalgbbmmbkgonfkokjajnlgojaio) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/tabchat/).
 
 ## Building
 
